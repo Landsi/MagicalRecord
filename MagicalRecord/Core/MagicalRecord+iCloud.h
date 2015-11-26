@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#ifndef TARGET_OS_TV
+#if !TARGET_OS_TV
 
 #import <MagicalRecord/MagicalRecordInternal.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>

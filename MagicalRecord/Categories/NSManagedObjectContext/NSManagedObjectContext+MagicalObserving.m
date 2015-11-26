@@ -85,7 +85,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	}
 }
 
-#ifndef TARGET_OS_TV
+#if !TARGET_OS_TV
 
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {

@@ -246,7 +246,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         MagicalRecordUbiquitySetupNotificationObserver = nil;
     }
 
-#ifndef TARGET_OS_TV
+#if !TARGET_OS_TV
     if ([MagicalRecord isICloudEnabled])
     {
         [MagicalRecordDefaultContext MR_stopObservingiCloudChangesInCoordinator:coordinator];
@@ -265,7 +265,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
     [moc MR_obtainPermanentIDsBeforeSaving];
 
-#ifndef TARGET_OS_TV
+#if !TARGET_OS_TV
     if ([MagicalRecord isICloudEnabled])
     {
         [MagicalRecordDefaultContext MR_observeiCloudChangesInCoordinator:coordinator];
