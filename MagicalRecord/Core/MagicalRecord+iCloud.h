@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#ifndef TARGET_OS_TV
+
 #import <MagicalRecord/MagicalRecordInternal.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
@@ -42,3 +44,5 @@
                                    completion:(void (^ __MR_nullable)(void))completion;
 
 @end
+
+#endif

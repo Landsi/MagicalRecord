@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#ifndef TARGET_OS_TV
+
 #import "MagicalRecord+iCloud.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
@@ -84,3 +86,5 @@ static BOOL _iCloudEnabled = NO;
 }
 
 @end
+
+#endif

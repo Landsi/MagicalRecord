@@ -246,11 +246,13 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         MagicalRecordUbiquitySetupNotificationObserver = nil;
     }
 
+#ifndef TARGET_OS_TV
     if ([MagicalRecord isICloudEnabled])
     {
         [MagicalRecordDefaultContext MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
-
+#endif
+    
     MagicalRecordDefaultContext = moc;
     [MagicalRecordDefaultContext MR_setWorkingName:@"MagicalRecord Default Context"];
 
@@ -262,6 +264,8 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 
     [moc MR_obtainPermanentIDsBeforeSaving];
+
+#ifndef TARGET_OS_TV
     if ([MagicalRecord isICloudEnabled])
     {
         [MagicalRecordDefaultContext MR_observeiCloudChangesInCoordinator:coordinator];
@@ -276,6 +280,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
                                                                                             [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
                                                                                         }];
     }
+#endif
     MRLogInfo(@"Set default context: %@", MagicalRecordDefaultContext);
 }
 

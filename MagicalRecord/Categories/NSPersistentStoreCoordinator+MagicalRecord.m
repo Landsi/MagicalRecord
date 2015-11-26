@@ -140,6 +140,8 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     return store;
 }
 
+#ifndef TARGET_OS_TV
+
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey storeIdentifier:(id)storeIdentifier cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock
 {
     NSAssert([contentNameKey rangeOfString:@"."].length > 0, @"NSPersistentStoreUbiquitousContentNameKey cannot contain a period.");
@@ -207,7 +209,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     });
 }
 
-
+#endif
 
 #pragma mark - Public Instance Methods
 
@@ -305,6 +307,8 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     return coordinator;
 }
 
+#ifndef TARGET_OS_TV
+
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 {
     [self MR_addiCloudContainerID:containerID 
@@ -400,6 +404,8 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     
     return psc;
 }
+
+#endif
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
 {
