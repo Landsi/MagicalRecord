@@ -125,8 +125,8 @@
 - (void)observeContext:(NSManagedObjectContext *)otherContext;
 - (void)stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void)observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
-- (void)observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-- (void)stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void)observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator __TVOS_UNAVAILABLE;
+- (void)stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator __TVOS_UNAVAILABLE;
 
 @end
 

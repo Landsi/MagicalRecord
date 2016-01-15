@@ -367,6 +367,8 @@
     return [self MR_observeContextOnMainThread:otherContext];
 }
 
+#if !TARGET_OS_TV
+
 - (void)observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     return [self MR_observeiCloudChangesInCoordinator:coordinator];
@@ -376,6 +378,8 @@
 {
     return [self MR_stopObservingiCloudChangesInCoordinator:coordinator];
 }
+
+#endif
 
 @end
 

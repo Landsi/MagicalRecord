@@ -28,7 +28,7 @@
 + (MagicalRecordStack *)setupClassicStackWithSQLiteStoreNamed:(NSString *)storeName;
 + (MagicalRecordStack *)setupClassicStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
 
-+ (MagicalRecordStack *)setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
++ (MagicalRecordStack *)setupiCloudStackWithLocalStoreNamed:(NSString *)localStore __TVOS_UNAVAILABLE;
 
 + (MagicalRecordStack *)setupStackWithInMemoryStore;
 

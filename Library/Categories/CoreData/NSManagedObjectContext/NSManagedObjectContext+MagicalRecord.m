@@ -29,8 +29,6 @@ NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType typ
     return @"Unknown Concurrency";
 }
 
-static id iCloudSetupNotificationObserver = nil;
-
 static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSManagedObjectContextWorkingName";
 
 @implementation NSManagedObjectContext (MagicalRecord)

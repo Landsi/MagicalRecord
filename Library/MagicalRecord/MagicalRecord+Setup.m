@@ -110,12 +110,16 @@
     return stack;
 }
 
-+ (MagicalRecordStack *)setupiCloudStackWithLocalStoreNamed:(NSString *)localStore
+#if !TARGET_OS_TV
+
++ (MagicalRecordStack *)setupiCloudStackWithLocalStoreNamed:(NSString *)localStore __TVOS_UNAVAILABLE
 {
     ClassicSQLiteMagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] initWithStoreNamed:localStore];
     stack.storeOptions = @{NSPersistentStoreUbiquitousContentNameKey : localStore};
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
+
+#endif
 
 @end

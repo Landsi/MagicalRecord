@@ -8,7 +8,7 @@
 #import <CoreData/CoreData.h>
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const MagicalRecordDidMergeChangesFromiCloudNotification;
+extern NSString *const MagicalRecordDidMergeChangesFromiCloudNotification __TVOS_UNAVAILABLE;
 
 @interface NSManagedObjectContext (MagicalRecord)
 

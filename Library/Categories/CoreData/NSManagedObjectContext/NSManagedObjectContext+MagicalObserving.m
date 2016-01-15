@@ -94,6 +94,8 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     [self MR_saveOnlySelfAndWait];
 }
 
+#if !TARGET_OS_TV
+
 #pragma mark - Context iCloud Merge Helpers
 
 - (void)MR_mergeChangesFromiCloud:(NSNotification *)notification
@@ -162,6 +164,8 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
                                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                 object:coordinator];
 }
+
+#endif
 
 @end
 
