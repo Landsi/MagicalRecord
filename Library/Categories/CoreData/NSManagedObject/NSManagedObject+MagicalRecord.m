@@ -87,7 +87,10 @@
         }
     };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([context concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic pop
     {
         requestBlock();
     }

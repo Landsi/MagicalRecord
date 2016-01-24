@@ -17,7 +17,10 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 - (void)MR_performBlock:(void (^)(void))block
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic pop
     {
         block();
     }
@@ -29,7 +32,10 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 - (void)MR_performBlockAndWait:(void (^)(void))block
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic pop
     {
         block();
     }
@@ -94,6 +100,37 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     [self MR_saveOnlySelfAndWait];
 }
 
+- (void)MR_mergeChangesFromNotification:(NSNotification *)notification
+{
+    NSManagedObjectContext *fromContext = [notification object];
+    
+    if (fromContext == self)
+        return;
+    
+    void (^mergeBlock)(void) = ^{
+        MRLogVerbose(@"Merging changes from %@ to %@ %@",
+                     [fromContext MR_workingName], [self MR_workingName],
+                     ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+        [self mergeChangesFromContextDidSaveNotification:notification];
+    };
+    
+    [self MR_performBlock:mergeBlock];
+}
+
+- (void)MR_mergeChangesOnMainThread:(NSNotification *)notification
+{
+    if ([NSThread isMainThread])
+    {
+        [self MR_mergeChangesFromNotification:notification];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(MR_mergeChangesFromNotification:)
+                               withObject:notification
+                            waitUntilDone:YES];
+    }
+}
+
 #if !TARGET_OS_TV
 
 #pragma mark - Context iCloud Merge Helpers
@@ -115,37 +152,6 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
                                         userInfo:[notification userInfo]];
     };
     [self MR_performBlock:mergeBlock];
-}
-
-- (void)MR_mergeChangesFromNotification:(NSNotification *)notification
-{
-    NSManagedObjectContext *fromContext = [notification object];
-
-    if (fromContext == self)
-        return;
-
-    void (^mergeBlock)(void) = ^{
-        MRLogVerbose(@"Merging changes from %@ to %@ %@",
-                     [fromContext MR_workingName], [self MR_workingName],
-                     ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-        [self mergeChangesFromContextDidSaveNotification:notification];
-    };
-
-    [self MR_performBlock:mergeBlock];
-}
-
-- (void)MR_mergeChangesOnMainThread:(NSNotification *)notification
-{
-    if ([NSThread isMainThread])
-    {
-        [self MR_mergeChangesFromNotification:notification];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(MR_mergeChangesFromNotification:)
-                               withObject:notification
-                            waitUntilDone:YES];
-    }
 }
 
 - (void)MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator

@@ -21,7 +21,10 @@ NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType typ
     {
         return @"Main Queue";
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (type == NSConfinementConcurrencyType)
+#pragma clang diagnostic pop
     {
         return @"Confinement";
     }
@@ -74,7 +77,10 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
 
 + (NSManagedObjectContext *)MR_confinementContext
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+#pragma clang diagnostic pop
     [context MR_setWorkingName:@"Confinement"];
     return context;
 }
