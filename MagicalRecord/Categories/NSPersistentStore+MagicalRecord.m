@@ -31,13 +31,21 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 
 + (NSString *)MR_applicationDocumentsDirectory 
 {
+#if !TARGET_OS_TV
 	return [self MR_directory:NSDocumentDirectory];
+#else
+    return [self MR_directory:NSCachesDirectory];
+#endif
 }
 
 + (NSString *)MR_applicationStorageDirectory
 {
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+#if !TARGET_OS_TV
     return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+#else
+    return [[self MR_directory:NSCachesDirectory] stringByAppendingPathComponent:applicationName];
+#endif
 }
 
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
